@@ -1,9 +1,10 @@
 #!/bin/bash
+SRVR="root@188.225.86.226"
 EXECUTABLE="EnglishPolicemanBot.py"
 TARDIR="/root/bots/EnglishPolicemanBot"
-ssh humble_dunnok "mkdir $TARDIR"
-scp *.py ".env" "requirements.txt" "root@188.225.86.226:$TARDIR"
-ssh humble_dunnok << EOF
+ssh $SRVR "mkdir $TARDIR"
+scp *.py ".env" "requirements.txt" "$SRVR:$TARDIR"
+ssh $SRVR << EOF
 pkill -f "$EXECUTABLE"
 cd "$TARDIR"
 python3 -m venv venv
