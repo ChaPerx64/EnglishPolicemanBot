@@ -3,7 +3,7 @@ SRVR="root@188.225.86.226"
 EXECUTABLE="EnglishPolicemanBot.py"
 TARDIR="/root/bots/EnglishPolicemanBot"
 ssh $SRVR "mkdir $TARDIR"
-scp *.py ".env" "requirements.txt" "$SRVR:$TARDIR"
+scp *.py "requirements.txt" "$SRVR:$TARDIR"
 ssh $SRVR << EOF
 cd "$TARDIR"
 python3 -m venv venv
