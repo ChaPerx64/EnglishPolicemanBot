@@ -1,0 +1,22 @@
+name: EPBot CD
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd "/root/bots/EnglishPolicemanBot"
+          python3 -m venv venv
+          source venv/bin/activate
+          nohup python3 "EnglishPolicemanBot.py" >/dev/null 2>&1 &
