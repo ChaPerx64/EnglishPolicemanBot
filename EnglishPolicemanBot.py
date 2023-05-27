@@ -17,6 +17,7 @@ from telegram.ext import (
 )
 from dotenv import load_dotenv
 import detectlanguage
+from ai import check_grammar_with_ai
 
 CURFEW_START_MSG = """
 English curfew is now enforced.
@@ -104,7 +105,8 @@ class DBConnector:
 
     def show_status(self, chat_id: int) -> (tuple, bool | None):
         self.curr.execute(
-            """SELECT time_start, time_end FROM curfews WHERE chat_id={}""".format(chat_id)
+            """SELECT time_start, time_end FROM curfews WHERE chat_id={}""".format(
+                chat_id)
         )
         sched = self.curr.fetchall()
         self.curr.execute(
@@ -137,7 +139,8 @@ class DBConnector:
         return self.curr.fetchall()
 
     def is_active(self, chat_id: str) -> bool:
-        self.curr.execute("SELECT chat_id FROM chats_active WHERE chat_id = '%s'" % chat_id)
+        self.curr.execute(
+            "SELECT chat_id FROM chats_active WHERE chat_id = '%s'" % chat_id)
         if self.curr.fetchone():
             return True
 
@@ -252,6 +255,14 @@ async def curfew_enforcer(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.effective_chat.send_message(HALT_MSG)
 
 
+async def check_grammar(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_chat.type != Chat.PRIVATE:
+        if "/check" in update.effective_message.text:
+            feedback = check_grammar_with_ai(
+                text=update.effective_message.text)
+            await update.effective_message.reply_text(feedback)
+
+
 def main():
     detectlanguage.configuration.api_key = os.getenv("TOKEN_LANGUAGE")
     app = ApplicationBuilder().token(os.getenv("TOKEN")).build()
@@ -260,6 +271,7 @@ def main():
     app.add_handler(CommandHandler('status', status))
     app.add_handler(CommandHandler('setcurfew', set_curfew))
     app.add_handler(CommandHandler('clear', clear_curfews))
+    app.add_handler(MessageHandler(filters.COMMAND, check_grammar))
     app.add_handler(MessageHandler(filters.TEXT, curfew_enforcer))
     app.job_queue.run_repeating(check_schedule, timedelta(seconds=10))
     app.run_polling(allowed_updates=Update.ALL_TYPES)

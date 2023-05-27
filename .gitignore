@@ -1,3 +1,6 @@
 .env
 *.db
 .idea
+venv
+.vscode/
+__pycache__/
