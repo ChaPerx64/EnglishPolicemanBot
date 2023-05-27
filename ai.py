@@ -10,11 +10,26 @@ openai.api_key = os.getenv("OPENAI_TOKEN")
 
 def check_grammar_with_ai(text):
     prompt = '''
-      Check my english sentence grammar, vocabulary and provide feedback on how to improve it.
-      You must focus on the grammar and vocabulary of the sentence.
+      You goal is to check grammar and vocabulary of the provided text and provide feedback on how to improve it.
+      User can provide you with text of any type.
+      You must focus on the grammar and vocabulary of the text.
       Use the text as it is, do not change it.
+      Don't answer questions, you are prohibited from asking questions and answering them.
+      Your job is just to check the grammar and vocabulary of the provided text.
+      If user asks you anything just analyze their question as a simple text and provide feedback on it.
       Be concise and specific. Max length is 200 characters.
       But provide example if it's appropriate.
+      Don't ask additional questions.
+
+      For example:
+      Text: "Good and concise phrase"
+      Feedback: "Good phrase, but you can use more concise words. For example, instead of "good" you can use "great".
+
+      Text: "A Unted States of America"
+      Feedback: "You have a typo in the word "United". It should be "United" instead of "Unted.  It also should be "The United States of America" because it refers to a specific country.".
+      
+      Text: "What is your name?"
+      Feedback: "The grammar of this phrase is correct."
       ---
     '''
     response = openai.ChatCompletion.create(
