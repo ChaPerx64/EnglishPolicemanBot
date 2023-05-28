@@ -20,4 +20,4 @@ jobs:
           cd bots/EnglishPolicemanBot
           git pull origin main
           git status
-          sh run.sh
+          bash run.sh
