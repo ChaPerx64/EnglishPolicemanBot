@@ -17,8 +17,8 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
-          print "popopopop"
-          pkill -f "EnglishPolicemanBot.py"
+          printf "popopopop"
+          pkill -f "[E]nglishPolicemanBot.py"
           cd bots/EnglishPolicemanBot
           git pull origin main
           git status
