@@ -18,4 +18,4 @@ jobs:
         port: 22
         script: |
           cd bots/EnglishPolicemanBot
-          bash run.sh
+          sh run.sh
