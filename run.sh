@@ -1,9 +1,5 @@
 
-EXECUTABLE="EnglishPolicemanBot.py"
-TARDIR="/root/bots/EnglishPolicemanBot"
-
-pkill -f "$EXECUTABLE"
-cd "$TARDIR"
+pkill -f [E]nglishPolicemanBot.py
 git pull origin main
 git status
 python3 -m venv venv
