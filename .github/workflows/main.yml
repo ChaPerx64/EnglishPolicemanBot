@@ -16,6 +16,12 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
+        script_stop: true
         script: |
           cd bots/EnglishPolicemanBot
-          sh run.sh
+          pkill -f [E]nglishPolicemanBot.py
+          git pull origin main
+          git status
+          python3 -m venv venv
+          source venv/bin/activate
+          nohup python3 "$EXECUTABLE" >/dev/null 2>&1 &
