@@ -17,12 +17,5 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
-          printf "popopopop"
-          pkill -f "[E]nglishPolicemanBot.py"
           cd bots/EnglishPolicemanBot
-          git pull origin main
-          git status
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
-          nohup python3 "EnglishPolicemanBot.py" >/dev/null 2>&1 &
+          bash run.sh
