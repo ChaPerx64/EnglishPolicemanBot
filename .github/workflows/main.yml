@@ -18,7 +18,7 @@ jobs:
         port: 22
         script: |
           pkill -f "EnglishPolicemanBot.py"
-          cd "/root/bots/EnglishPolicemanBot"
+          cd bots/EnglishPolicemanBot
           git pull origin main
           git status
           python3 -m venv venv
