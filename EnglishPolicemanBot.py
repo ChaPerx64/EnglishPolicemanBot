@@ -264,7 +264,7 @@ async def check_grammar(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def startup_msg(context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(str(os.getenv('OWNER_ID')), 'EnglishPolicemanBot up and running!')
+    await context.bot.send_message(str(os.getenv('OWNER_ID')), 'EnglishPolicemanBot is up and running!')
 
 
 def main():

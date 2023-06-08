@@ -1,4 +1,4 @@
-
+#!/bin/bash
 pkill -f [E]nglishPolicemanBot.py
 python3 -m venv venv
 source venv/bin/activate
