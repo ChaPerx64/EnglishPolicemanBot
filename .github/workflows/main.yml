@@ -27,7 +27,7 @@ jobs:
           docker run \
             --name ep_bot_container \
             --env-file './bots/ep_bot/.env.prod' \
-            --mount source=ep_bot_volume,target=/db \
+            --mount source=ep_bot_volume,target=/ep_bot/db \
             --restart unless-stopped \
             -d \
             chapardev/ep_bot
