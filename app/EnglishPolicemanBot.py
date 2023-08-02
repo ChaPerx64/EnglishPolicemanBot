@@ -2,6 +2,7 @@ import os
 import sqlite3
 from datetime import datetime, timedelta
 from itertools import repeat
+import time
 from zoneinfo import ZoneInfo
 
 from telegram import (
@@ -285,6 +286,7 @@ def main():
 
 
 if __name__ == "__main__":
+    time.sleep(5)
     db = DBConnector()
     load_dotenv()
     main()

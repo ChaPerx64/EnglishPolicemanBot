@@ -26,7 +26,7 @@ jobs:
             git@github.com:ChaPerx64/EnglishPolicemanBot.git
           docker run \
             --name ep_bot_container \
-            --env-file './bots/ep_bot/.env.prod' \
+            --env-file 'bots/ep_bot/.env.prod' \
             --mount source=ep_bot_volume,target=/ep_bot/db \
             --restart unless-stopped \
             -d \
