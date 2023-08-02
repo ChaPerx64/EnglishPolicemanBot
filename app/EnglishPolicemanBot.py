@@ -19,6 +19,8 @@ from dotenv import load_dotenv
 import detectlanguage
 from ai import check_grammar_with_ai
 
+DB_PATH = "/db/chats.db"
+
 CURFEW_START_MSG = """
 English curfew is now enforced.
 Every message sent to this chat that contains non-Latin symbols will be deleted immediately.
@@ -52,7 +54,7 @@ TZ = ZoneInfo('Europe/Belgrade')
 
 class DBConnector:
     def __init__(self):
-        self.con = sqlite3.connect('chats.db')
+        self.con = sqlite3.connect(DB_PATH)
         self.curr = self.con.cursor()
         self.init_tables()
 

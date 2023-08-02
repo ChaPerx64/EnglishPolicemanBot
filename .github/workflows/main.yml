@@ -2,12 +2,12 @@ name: EPBot CD
 
 on:
   push:
-    branches: [ main ]
-    
+    branches:
+      - "main"
+
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    
     steps:
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
@@ -18,7 +18,17 @@ jobs:
         port: 22
         script_stop: true
         script: |
-          cd bots/EnglishPolicemanBot
-          git pull origin main -q
-          git status
-          bash run.sh
+          docker stop ep_bot_container || true \
+            && docker rm ep_bot_container || true
+          docker build \
+            --ssh default=./.ssh/id_rsa \
+            -t chapardev/ep_bot \
+            git@github.com:ChaPerx64/EnglishPolicemanBot.git
+          docker run \
+            --name ep_bot_container \
+            --env-file './bots/ep_bot/.env.prod' \
+            --mount source=ep_bot_volume,target=/db \
+            --restart unless-stopped \
+            -d \
+            chapardev/cdg_bot
+          docker image prune -f
