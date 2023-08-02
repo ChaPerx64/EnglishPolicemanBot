@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 import detectlanguage
 from ai import check_grammar_with_ai
 
-DB_PATH = "/db/chats.db"
+DB_PATH = "./db/chats.db"
 
 CURFEW_START_MSG = """
 English curfew is now enforced.
@@ -286,5 +286,5 @@ def main():
 
 if __name__ == "__main__":
     db = DBConnector()
-    if load_dotenv():
-        main()
+    load_dotenv()
+    main()

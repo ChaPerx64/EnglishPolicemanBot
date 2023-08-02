@@ -18,7 +18,6 @@ jobs:
         port: 22
         script_stop: true
         script: |
-          touch somefile.txt
           docker stop ep_bot_container || true \
             && docker rm ep_bot_container || true
           docker build \
