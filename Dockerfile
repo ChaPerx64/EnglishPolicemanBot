@@ -1,5 +1,5 @@
 FROM python:3.11-alpine3.18
-WORKDIR /cdg_bot/
+WORKDIR /ep_bot/
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
